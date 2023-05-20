@@ -3,6 +3,7 @@
 output/
 /dist/
 /node_modules/
+/public/dist/
 
 # Binaries for programs and plugins
 *.exe
