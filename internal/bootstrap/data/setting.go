@@ -80,13 +80,13 @@ func InitialSettings() []model.SettingItem {
 		{Key: conf.VERSION, Value: conf.Version, Type: conf.TypeString, Group: model.SITE, Flag: model.READONLY},
 		//{Key: conf.ApiUrl, Value: "", Type: conf.TypeString, Group: model.SITE},
 		//{Key: conf.BasePath, Value: "", Type: conf.TypeString, Group: model.SITE},
-		{Key: conf.SiteTitle, Value: "AList", Type: conf.TypeString, Group: model.SITE},
-		{Key: conf.Announcement, Value: "### repo\nhttps://github.com/alist-org/alist", Type: conf.TypeText, Group: model.SITE},
+		{Key: conf.SiteTitle, Value: "Cloud Space", Type: conf.TypeString, Group: model.SITE},
+		{Key: conf.Announcement, Value: "", Type: conf.TypeText, Group: model.SITE},
 		{Key: "pagination_type", Value: "all", Type: conf.TypeSelect, Options: "all,pagination,load_more,auto_load_more", Group: model.SITE},
 		{Key: "default_page_size", Value: "30", Type: conf.TypeNumber, Group: model.SITE},
 		{Key: conf.AllowIndexed, Value: "false", Type: conf.TypeBool, Group: model.SITE},
 		{Key: conf.AllowMounted, Value: "true", Type: conf.TypeBool, Group: model.SITE},
-		{Key: conf.RobotsTxt, Value: "User-agent: *\nAllow: /", Type: conf.TypeText, Group: model.SITE},
+		{Key: conf.RobotsTxt, Value: "User-agent: *\nDisallow: /", Type: conf.TypeText, Group: model.SITE},
 		// style settings
 		{Key: conf.Logo, Value: "https://cdn.jsdelivr.net/gh/alist-org/logo@main/logo.svg", Type: conf.TypeText, Group: model.STYLE},
 		{Key: conf.Favicon, Value: "https://cdn.jsdelivr.net/gh/alist-org/logo@main/logo.svg", Type: conf.TypeString, Group: model.STYLE},
@@ -105,14 +105,13 @@ func InitialSettings() []model.SettingItem {
 		{Key: "external_previews", Value: `{}`, Type: conf.TypeText, Group: model.PREVIEW},
 		{Key: "iframe_previews", Value: `{
 	"doc,docx,xls,xlsx,ppt,pptx": {
-		"Microsoft":"https://view.officeapps.live.com/op/view.aspx?src=$e_url",
-		"Google":"https://docs.google.com/gview?url=$e_url&embedded=true"
+		"Office预览":"https://view.officeapps.live.com/op/view.aspx?src=$e_url"
 	},
 	"pdf": {
-		"PDF.js":"https://alist-org.github.io/pdf.js/web/viewer.html?file=$e_url"
+		"PDF预览":"https://alist-org.github.io/pdf.js/web/viewer.html?file=$e_url"
 	},
 	"epub": {
-		"EPUB.js":"https://alist-org.github.io/static/epub.js/viewer.html?url=$e_url"
+		"EPUB预览":"https://alist-org.github.io/static/epub.js/viewer.html?url=$e_url"
 	}
 }`, Type: conf.TypeText, Group: model.PREVIEW},
 		//		{Key: conf.OfficeViewers, Value: `{
@@ -123,13 +122,105 @@ func InitialSettings() []model.SettingItem {
 		//	"pdf.js":"https://alist-org.github.io/pdf.js/web/viewer.html?file=$url"
 		//}`, Type: conf.TypeText, Group: model.PREVIEW},
 		{Key: "audio_cover", Value: "https://jsd.nn.ci/gh/alist-org/logo@main/logo.svg", Type: conf.TypeString, Group: model.PREVIEW},
-		{Key: conf.AudioAutoplay, Value: "true", Type: conf.TypeBool, Group: model.PREVIEW},
-		{Key: conf.VideoAutoplay, Value: "true", Type: conf.TypeBool, Group: model.PREVIEW},
+		{Key: conf.AudioAutoplay, Value: "false", Type: conf.TypeBool, Group: model.PREVIEW},
+		{Key: conf.VideoAutoplay, Value: "false", Type: conf.TypeBool, Group: model.PREVIEW},
 		// global settings
 		{Key: conf.HideFiles, Value: "/\\/README.md/i", Type: conf.TypeText, Group: model.GLOBAL},
 		{Key: "package_download", Value: "true", Type: conf.TypeBool, Group: model.GLOBAL},
-		{Key: conf.CustomizeHead, Value: `<script src="https://polyfill.io/v3/polyfill.min.js?features=String.prototype.replaceAll"></script>`, Type: conf.TypeText, Group: model.GLOBAL, Flag: model.PRIVATE},
-		{Key: conf.CustomizeBody, Type: conf.TypeText, Group: model.GLOBAL, Flag: model.PRIVATE},
+		{Key: conf.CustomizeHead, Value: `<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=String.prototype.replaceAll"></script>
+		<style>
+		/*白天模式 搜索主体+毛玻璃*/
+		.hope-ui-light .hope-c-PJLV-iiBaxsN-css{
+		   background-color: rgba(255,255,255,0.2)!important;
+		   backdrop-filter: blur(10px)!important;
+		}
+		
+		/*白天模式 搜索栏输入框+毛玻璃*/
+		.hope-ui-light .hope-c-kvTTWD-hYRNAb-variant-filled{
+		   background-color: rgba(255,255,255,0.2)!important;
+		   backdrop-filter: blur(10px)!important;
+		}
+		
+		/*白天模式 搜索按钮+毛玻璃*/
+		.hope-ui-light .hope-c-PJLV-ikEIIxw-css{
+		   background-color: rgba(255,255,255,0.2)!important;
+		   backdrop-filter: blur(10px)!important;
+		   padding: var(--hope-space-1)!important;
+		}
+		
+		/*夜间模式搜索主体+毛玻璃*/
+		.hope-ui-dark .hope-c-PJLV-iiBaxsN-css{
+			background-color: rgb(0 0 0 / 10%)!important;
+			backdrop-filter: blur(10px)!important;
+		}
+		
+		/*夜间模式搜索栏+毛玻璃*/
+		.hope-ui-dark .hope-c-kvTTWD-hYRNAb-variant-filled{
+			background-color: rgb(0 0 0 / 10%)!important;
+			backdrop-filter: blur(10px)!important;
+		}
+		
+		/*夜间模式 搜索按钮+毛玻璃*/
+		.hope-ui-dark .hope-c-PJLV-ikEIIxw-css{
+			background-color: rgb(0 0 0 / 10%)!important;
+			backdrop-filter: blur(10px)!important;
+			padding: var(--hope-space-1)!important;
+		}
+		</style>`, Type: conf.TypeText, Group: model.GLOBAL, Flag: model.PRIVATE},
+		{Key: conf.CustomizeBody, Value: `<!-- 网页鼠标点击特效 - 爱心 -->
+		<script type="text/javascript">
+				 ! function (e, t, a) {
+					function r() {
+						for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[
+								e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x +
+							"px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e]
+							.scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+						requestAnimationFrame(r)
+					}
+					function n() {
+						var t = "function" == typeof e.onclick && e.onclick;
+						e.onclick = function (e) {
+							t && t(), o(e)
+						}
+					}
+		 
+					function o(e) {
+						var a = t.createElement("div");
+						a.className = "heart", s.push({
+							el: a,
+							x: e.clientX - 5,
+							y: e.clientY - 5,
+							scale: 1,
+							alpha: 1,
+							color: c()
+						}), t.body.appendChild(a)
+					}
+		 
+					function i(e) {
+						var a = t.createElement("style");
+						a.type = "text/css";
+						try {
+							a.appendChild(t.createTextNode(e))
+						} catch (t) {
+							a.styleSheet.cssText = e
+						}
+						t.getElementsByTagName("head")[0].appendChild(a)
+					}
+		 
+					function c() {
+						return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math
+							.random()) + ")"
+					}
+					var s = [];
+					e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e
+						.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+							setTimeout(e, 1e3 / 60)
+						}, i(
+							".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"
+						), n(), r()
+				}(window, document);
+			
+		</script>`, Type: conf.TypeText, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.LinkExpiration, Value: "0", Type: conf.TypeNumber, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.SignAll, Value: "false", Type: conf.TypeBool, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.PrivacyRegs, Value: `(?:(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])
