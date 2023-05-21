@@ -4,6 +4,7 @@ output/
 /dist/
 /node_modules/
 /public/dist/
+alist
 
 # Binaries for programs and plugins
 *.exe
@@ -31,4 +32,3 @@ output/
 /daemon/
 /public/dist/*
 /!public/dist/README.md
-alist
