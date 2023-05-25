@@ -26,24 +26,11 @@ ldflags="\
 "
 
 FetchWebDev() {
-  rm -rf public/dist
   cp -r ../alist-web-tiny/dist public
 }
 
 FetchWebRelease() {
-  rm -rf public/dist
   cp -r ../alist-web-tiny/dist public
-}
-
-BuildWinArm64() {
-  echo building for windows-arm64
-  chmod +x ./wrapper/zcc-arm64
-  chmod +x ./wrapper/zcxx-arm64
-  export GOOS=windows
-  export GOARCH=arm64
-  export CC=$(pwd)/wrapper/zcc-arm64
-  export CXX=$(pwd)/wrapper/zcxx-arm64
-  go build -o "$1" -ldflags="$ldflags" -tags=jsoniter .
 }
 
 BuildDev() {
