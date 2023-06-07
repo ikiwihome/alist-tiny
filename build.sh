@@ -34,7 +34,7 @@ FetchWebRelease() {
 }
 
 BuildDev() {
-  xgo -targets=linux/amd64,windows/amd64 -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
+  xgo -targets=linux/amd64 -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
   mkdir -p "dist"
   mv alist-* dist
   cd dist
@@ -53,15 +53,15 @@ BuildRelease() {
   mkdir -p "build"
   muslflags="--extldflags '-static -fpic' $ldflags"
   BASE="https://musl.cc/"
-  FILES=(x86_64-linux-musl-cross aarch64-linux-musl-cross)
+  FILES=(x86_64-linux-musl-cross)
 
   for i in "${FILES[@]}"; do
     url="${BASE}${i}.tgz"
     curl -L -o "${i}.tgz" "${url}"
     sudo tar xf "${i}.tgz" --strip-components 1 -C /usr/local
   done
-  OS_ARCHES=(linux-musl-amd64 linux-musl-arm64)
-  CGO_ARGS=(x86_64-linux-musl-gcc aarch64-linux-musl-gcc)
+  OS_ARCHES=(linux-musl-amd64)
+  CGO_ARGS=(x86_64-linux-musl-gcc)
   for i in "${!OS_ARCHES[@]}"; do
     os_arch=${OS_ARCHES[$i]}
     cgo_cc=${CGO_ARGS[$i]}
@@ -72,11 +72,6 @@ BuildRelease() {
     export CGO_ENABLED=1
     go build -o ./build/$appName-$os_arch -ldflags="$muslflags" -tags=jsoniter .
   done
-  xgo -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
-  # why? Because some target platforms seem to have issues with upx compression
-  upx -9 ./alist-linux-amd64
-  cp ./alist-windows-amd64.exe
-  mv alist-* build
 }
 
 MakeRelease() {

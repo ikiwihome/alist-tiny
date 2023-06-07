@@ -32,3 +32,4 @@ alist
 /daemon/
 /public/dist/*
 /!public/dist/README.md
+x86_64-linux-musl-cross.tgz
